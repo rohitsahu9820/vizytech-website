@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Vizytech</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo"><span class="logo-mark">⬡</span><span class="logo-text">Vizy<em>tech</em></span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="btn-nav">Get a Demo</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-bg"><div class="grid-overlay"></div><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  <div class="container">
+    <div class="section-tag">Get In Touch</div>
+    <h1>Let's Build Your<br/><span class="gradient-text">Dream Dashboard</span></h1>
+    <p>Tell us about your project and we'll get back to you within 24 hours with a tailored plan.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- Contact Form -->
+      <div class="contact-form-wrap">
+        <div class="cf-header">
+          <h2>Start a Conversation</h2>
+          <p>Fill in the details and our team will reach out with a customized proposal.</p>
+        </div>
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" name="name" placeholder="Your full name" required/>
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" name="email" placeholder="you@company.com" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Company Name</label>
+              <input type="text" name="company" placeholder="Your company"/>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="+91 98765 43210"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Industry *</label>
+            <select name="industry" required>
+              <option value="" disabled selected>Select your industry</option>
+              <option>Healthcare</option>
+              <option>Finance & Banking</option>
+              <option>Retail & E-commerce</option>
+              <option>Manufacturing</option>
+              <option>Logistics & Supply Chain</option>
+              <option>SaaS & Technology</option>
+              <option>Real Estate</option>
+              <option>Education</option>
+              <option>Government</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Type of Project *</label>
+            <select name="project_type" required>
+              <option value="" disabled selected>What do you need?</option>
+              <option>New Dashboard Build</option>
+              <option>Dashboard Redesign</option>
+              <option>Data Integration</option>
+              <option>Analytics Consulting</option>
+              <option>Real-Time Analytics</option>
+              <option>Training & Support</option>
+              <option>Not Sure — Need Advice</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Estimated Budget</label>
+            <select name="budget">
+              <option value="" disabled selected>Approximate budget range</option>
+              <option>Under ₹1 Lakh</option>
+              <option>₹1 – ₹5 Lakhs</option>
+              <option>₹5 – ₹15 Lakhs</option>
+              <option>₹15 – ₹50 Lakhs</option>
+              <option>₹50 Lakhs+</option>
+              <option>Flexible / TBD</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell Us More *</label>
+            <textarea name="message" placeholder="Describe your data challenges, the dashboards you need, key metrics you track, or any other details that will help us understand your project..." required></textarea>
+          </div>
+          <div class="form-group upload-attachment">
+            <label>Attach Reference Files (optional)</label>
+            <div class="attach-zone" id="attachZone">
+              <input type="file" id="attachInput" multiple accept="image/*,.pdf,.xlsx,.csv" hidden/>
+              <span class="attach-icon">📎</span>
+              <span>Drag files here or <button type="button" onclick="document.getElementById('attachInput').click()">browse</button></span>
+              <div id="attachList" class="attach-list"></div>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary btn-submit">
+            <span id="submitText">Send My Request</span>
+            <span id="submitIcon">→</span>
+          </button>
+          <div id="formSuccess" class="form-success" style="display:none">
+            <div class="success-icon">✓</div>
+            <h3>Message Sent!</h3>
+            <p>Thank you! We'll review your project and get back to you within 24 hours.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="ci-card">
+          <h3>Contact Information</h3>
+          <div class="ci-item">
+            <div class="ci-icon">✉</div>
+            <div>
+              <strong>Email Us</strong>
+              <a href="mailto:hello@vizytech.in">hello@vizytech.in</a>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">📞</div>
+            <div>
+              <strong>Call Us</strong>
+              <a href="tel:+911234567890">+91 XXXXX XXXXX</a>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">📍</div>
+            <div>
+              <strong>Office</strong>
+              <span>Ratnagiri, Maharashtra, India</span>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">🕐</div>
+            <div>
+              <strong>Working Hours</strong>
+              <span>Mon–Fri, 9:00 AM – 6:30 PM IST</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ci-card">
+          <h3>What Happens Next?</h3>
+          <div class="next-steps">
+            <div class="ns-step"><div class="ns-num">1</div><div><strong>We Review</strong><p>Our team reviews your project within a few hours.</p></div></div>
+            <div class="ns-step"><div class="ns-num">2</div><div><strong>Discovery Call</strong><p>We schedule a 30-min call to understand your needs in depth.</p></div></div>
+            <div class="ns-step"><div class="ns-num">3</div><div><strong>Proposal</strong><p>You receive a tailored proposal with timeline and pricing.</p></div></div>
+            <div class="ns-step"><div class="ns-num">4</div><div><strong>We Build</strong><p>Project kickoff — and we get to work building your dashboard.</p></div></div>
+          </div>
+        </div>
+
+        <div class="ci-card social-card">
+          <h3>Follow Our Work</h3>
+          <div class="social-links">
+            <a href="#" class="social-btn"><span>in</span>LinkedIn</a>
+            <a href="#" class="social-btn"><span>𝕏</span>Twitter/X</a>
+            <a href="#" class="social-btn"><span>⌥</span>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo"><span class="logo-mark">⬡</span><span class="logo-text">Vizy<em>tech</em></span></a><p>Visionary Tech, Visible Results.</p><div class="footer-socials"><a href="#">in</a><a href="#">𝕏</a><a href="#">⌥</a></div></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Custom Dashboards</a></li><li><a href="services.html">Data Integration</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Get in Touch</a></li><li><a href="mailto:hello@vizytech.in">hello@vizytech.in</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Vizytech — Visionary Tech, Visible Results. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<style>
+.contact-layout { display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: start; }
+.cf-header { margin-bottom: 32px; }
+.cf-header h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+.cf-header p { font-size: 0.875rem; color: var(--text-muted); }
+.contact-form { display: flex; flex-direction: column; gap: 0; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.btn-submit { width: 100%; justify-content: center; font-size: 1rem; padding: 14px 32px; margin-top: 8px; gap: 12px; }
+.form-success { text-align: center; padding: 40px; background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2); border-radius: var(--radius); margin-top: 16px; }
+.success-icon { font-size: 2rem; margin-bottom: 12px; color: var(--accent4); }
+.form-success h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.form-success p { font-size: 0.875rem; color: var(--text-muted); }
+.attach-zone { border: 1px dashed var(--border2); border-radius: 8px; padding: 16px; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; flex-wrap: wrap; }
+.attach-zone button { background: none; border: none; color: var(--accent); cursor: pointer; font-weight: 600; padding: 0; }
+.attach-list { width: 100%; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.attach-chip { background: var(--bg-card); border: 1px solid var(--border2); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; }
+.ci-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
+.ci-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 20px; }
+.ci-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
+.ci-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+.ci-item strong { display: block; font-size: 0.82rem; margin-bottom: 2px; }
+.ci-item a, .ci-item span { font-size: 0.82rem; color: var(--text-muted); }
+.ci-item a:hover { color: var(--accent); }
+.next-steps { display: flex; flex-direction: column; gap: 16px; }
+.ns-step { display: flex; gap: 14px; align-items: flex-start; }
+.ns-num { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: #0a0a0a; flex-shrink: 0; }
+.ns-step strong { display: block; font-size: 0.88rem; margin-bottom: 2px; }
+.ns-step p { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
+.social-links { display: flex; flex-direction: column; gap: 10px; }
+.social-btn { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+.social-btn span { width: 28px; height: 28px; border-radius: 6px; background: rgba(245,158,11,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+.social-btn:hover { border-color: var(--accent); color: var(--accent); }
+@media(max-width:1024px){ .contact-layout{grid-template-columns:1fr;} }
+@media(max-width:640px){ .form-row{grid-template-columns:1fr;} }
+</style>
+
+<script src="../js/main.js"></script>
+<script>
+// Attach files
+const attachInput = document.getElementById('attachInput');
+const attachList = document.getElementById('attachList');
+const attachZone = document.getElementById('attachZone');
+attachZone.addEventListener('click', e => { if (e.target.tagName !== 'BUTTON') attachInput.click(); });
+attachInput.addEventListener('change', () => {
+  attachList.innerHTML = '';
+  Array.from(attachInput.files).forEach(f => {
+    const chip = document.createElement('div');
+    chip.className = 'attach-chip';
+    chip.textContent = f.name;
+    attachList.appendChild(chip);
+  });
+});
+
+// Form submit
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type=submit]');
+  btn.disabled = true;
+  document.getElementById('submitText').textContent = 'Sending...';
+  setTimeout(() => {
+    btn.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }, 1200);
+});
+</script>
+</body>
+</html>

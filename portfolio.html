@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio — Vizytech</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo"><span class="logo-mark">⬡</span><span class="logo-text">Vizy<em>tech</em></span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="btn-nav">Get a Demo</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-bg"><div class="grid-overlay"></div><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  <div class="container">
+    <div class="section-tag">Our Work</div>
+    <h1>Dashboard <span class="gradient-text">Portfolio</span></h1>
+    <p>A showcase of custom dashboards we've built across industries. Every project tells a data story.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs" id="filterTabs">
+      <button class="ftab active" data-filter="all">All</button>
+      <button class="ftab" data-filter="healthcare">Healthcare</button>
+      <button class="ftab" data-filter="finance">Finance</button>
+      <button class="ftab" data-filter="retail">Retail</button>
+      <button class="ftab" data-filter="manufacturing">Manufacturing</button>
+      <button class="ftab" data-filter="logistics">Logistics</button>
+      <button class="ftab" data-filter="uploaded">My Uploads</button>
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="portfolio-grid-full" id="portfolioFull">
+      <div class="portfolio-card" data-cat="healthcare">
+        <div class="pc-inner">
+          <div class="pc-img-area"><div class="pc-placeholder"><span>🏥</span><p>Healthcare Dashboard</p></div></div>
+          <div class="pc-info"><div class="pc-tag">Healthcare</div><h3>Patient Flow Analytics</h3><p>Real-time hospital bed management and patient journey tracking dashboard for a 500-bed hospital.</p></div>
+        </div>
+      </div>
+      <div class="portfolio-card" data-cat="finance">
+        <div class="pc-inner">
+          <div class="pc-img-area"><div class="pc-placeholder"><span>💰</span><p>Finance Dashboard</p></div></div>
+          <div class="pc-info"><div class="pc-tag">Finance</div><h3>Investment Portfolio Tracker</h3><p>Multi-asset portfolio with live risk metrics, benchmarks, and P&L analysis.</p></div>
+        </div>
+      </div>
+      <div class="portfolio-card" data-cat="retail">
+        <div class="pc-inner">
+          <div class="pc-img-area"><div class="pc-placeholder"><span>🛒</span><p>Retail Dashboard</p></div></div>
+          <div class="pc-info"><div class="pc-tag">Retail</div><h3>Omni-Channel Sales Hub</h3><p>Unified sales tracking across online, in-store, and mobile channels for a retail chain.</p></div>
+        </div>
+      </div>
+      <div class="portfolio-card" data-cat="manufacturing">
+        <div class="pc-inner">
+          <div class="pc-img-area"><div class="pc-placeholder"><span>🏭</span><p>Manufacturing Dashboard</p></div></div>
+          <div class="pc-info"><div class="pc-tag">Manufacturing</div><h3>OEE & Production KPIs</h3><p>Overall Equipment Effectiveness monitoring with real-time machine performance metrics.</p></div>
+        </div>
+      </div>
+      <div class="portfolio-card" data-cat="logistics">
+        <div class="pc-inner">
+          <div class="pc-img-area"><div class="pc-placeholder"><span>🚚</span><p>Logistics Dashboard</p></div></div>
+          <div class="pc-info"><div class="pc-tag">Logistics</div><h3>Fleet & Delivery Analytics</h3><p>GPS-integrated fleet performance and last-mile delivery tracking for a logistics company.</p></div>
+        </div>
+      </div>
+      <div class="portfolio-card" data-cat="healthcare">
+        <div class="pc-inner">
+          <div class="pc-img-area"><div class="pc-placeholder"><span>💊</span><p>Pharma Dashboard</p></div></div>
+          <div class="pc-info"><div class="pc-tag">Healthcare</div><h3>Pharma Supply Chain Monitor</h3><p>Drug inventory, expiry tracking, and distribution analytics for a pharmaceutical chain.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="section-header" style="margin-top:80px">
+      <div class="section-tag">Add to Portfolio</div>
+      <h2 class="section-title">Upload Your <span class="gradient-text">Dashboard Images</span></h2>
+      <p class="section-desc">Drag & drop your dashboard screenshots to showcase them here.</p>
+    </div>
+
+    <div class="upload-zone-full" id="uploadZone">
+      <input type="file" id="fileInput" accept="image/*" multiple hidden/>
+      <div class="uzf-inner">
+        <div class="uzf-icon">⬆</div>
+        <h3>Drop Dashboard Screenshots Here</h3>
+        <p>PNG, JPG, WEBP • Multiple files supported</p>
+        <div class="uzf-btns">
+          <button class="btn-primary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Preview -->
+    <div id="uploadedSection" style="display:none;margin-top:40px;">
+      <div class="section-header" style="text-align:left;margin-bottom:24px;">
+        <div class="section-tag">Uploaded Dashboards</div>
+      </div>
+      <div class="portfolio-grid-full" id="uploadedGrid"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-bg"><div class="orb orb-4"></div><div class="orb orb-5"></div></div>
+  <div class="container">
+    <div class="cta-content">
+      <h2>Want a Dashboard Like These?</h2>
+      <p>Let's discuss your project and build something even better.</p>
+      <div class="cta-btns"><a href="contact.html" class="btn-primary btn-large">Start Your Project</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo"><span class="logo-mark">⬡</span><span class="logo-text">Vizy<em>tech</em></span></a><p>Visionary Tech, Visible Results.</p><div class="footer-socials"><a href="#">in</a><a href="#">𝕏</a><a href="#">⌥</a></div></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Custom Dashboards</a></li><li><a href="services.html">Data Integration</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Get in Touch</a></li><li><a href="mailto:hello@vizytech.in">hello@vizytech.in</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Vizytech — Visionary Tech, Visible Results. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<style>
+.filter-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+.ftab { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 18px; font-family: var(--font-head); font-size: 0.82rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+.ftab.active, .ftab:hover { border-color: var(--accent); color: var(--accent); background: rgba(245,158,11,0.06); }
+.portfolio-grid-full { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.portfolio-card[data-cat].hidden { display: none; }
+.upload-zone-full { border: 2px dashed rgba(245,158,11,0.25); border-radius: var(--radius-lg); padding: 72px 40px; text-align: center; background: rgba(245,158,11,0.02); cursor: pointer; transition: all 0.3s; }
+.upload-zone-full:hover, .upload-zone-full.drag-over { border-color: var(--accent); background: var(--glow); }
+.uzf-icon { font-size: 3rem; margin-bottom: 20px; }
+.upload-zone-full h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+.upload-zone-full p { color: var(--text-muted); margin-bottom: 24px; }
+.uzf-btns { display: flex; gap: 12px; justify-content: center; }
+@media(max-width:1024px){ .portfolio-grid-full{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:640px){ .portfolio-grid-full{grid-template-columns:1fr;} }
+</style>
+
+<script src="../js/main.js"></script>
+<script>
+// Filter logic
+const tabs = document.querySelectorAll('.ftab');
+const cards = document.querySelectorAll('#portfolioFull .portfolio-card');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    cards.forEach(card => {
+      if (filter === 'all' || card.dataset.cat === filter) card.classList.remove('hidden');
+      else card.classList.add('hidden');
+    });
+    if (filter === 'uploaded') {
+      cards.forEach(c => c.classList.add('hidden'));
+    }
+  });
+});
+
+// Upload
+const uz = document.getElementById('uploadZone');
+const fi = document.getElementById('fileInput');
+uz.addEventListener('dragover', e => { e.preventDefault(); uz.classList.add('drag-over'); });
+uz.addEventListener('dragleave', () => uz.classList.remove('drag-over'));
+uz.addEventListener('drop', e => { e.preventDefault(); uz.classList.remove('drag-over'); handlePortfolioFiles(e.dataTransfer.files); });
+fi.addEventListener('change', () => handlePortfolioFiles(fi.files));
+
+function handlePortfolioFiles(files) {
+  const grid = document.getElementById('uploadedGrid');
+  const sec = document.getElementById('uploadedSection');
+  sec.style.display = 'block';
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const title = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      const card = document.createElement('div');
+      card.className = 'portfolio-card';
+      card.dataset.cat = 'uploaded';
+      card.innerHTML = `<div class="pc-inner"><div class="pc-img-area"><img src="${e.target.result}" alt="${title}" style="width:100%;height:100%;object-fit:cover"/></div><div class="pc-info"><div class="pc-tag">Uploaded</div><h3>${title}</h3><p>Custom dashboard screenshot.</p></div></div>`;
+      card.style.animation = 'fadeInUp 0.5s ease both';
+      grid.appendChild(card);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+</body>
+</html>
