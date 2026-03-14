@@ -1,399 +1,1713 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vizytech — Visionary Tech, Visible Results.</title>
-  <link rel="stylesheet" href="css/style.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vizytech — Visionary Tech, Visible Results.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+<style>
+/* ══════════════════════════════════════════
+   VIZYTECH — MISSION CONTROL DESIGN SYSTEM
+   Charcoal + Electric Cyan + Neon Mint
+══════════════════════════════════════════ */
+
+:root {
+  --bg:          #070a0d;
+  --bg1:         #0c1017;
+  --bg2:         #111820;
+  --bg3:         #141c26;
+  --glass:       rgba(14, 22, 34, 0.7);
+  --glass2:      rgba(20, 30, 46, 0.55);
+  --border:      rgba(0,229,255,0.08);
+  --border2:     rgba(0,229,255,0.18);
+  --border3:     rgba(0,229,255,0.35);
+  --c:           #00e5ff;
+  --g:           #00ff9d;
+  --b:           #3b82f6;
+  --w:           #dde8ef;
+  --muted:       #5a7a8c;
+  --muted2:      #8aabb8;
+  --danger:      #ff4466;
+  --warn:        #ffb347;
+  --r:           14px;
+  --r2:          22px;
+  --nav-h:       68px;
+  --font-head:   'Syne', sans-serif;
+  --font-body:   'DM Sans', sans-serif;
+  --font-mono:   'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--w);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom Cursor ── */
+#cursor {
+  position: fixed; pointer-events: none; z-index: 10000;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 20px var(--c), 0 0 40px rgba(0,229,255,0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: screen;
+}
+#cursor-ring {
+  position: fixed; pointer-events: none; z-index: 9999;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(0,229,255,0.4);
+  transform: translate(-50%, -50%);
+  transition: all 0.12s ease;
+}
+body:has(a:hover, button:hover) #cursor { width: 16px; height: 16px; background: var(--g); }
+body:has(a:hover, button:hover) #cursor-ring { width: 48px; height: 48px; border-color: rgba(0,255,157,0.5); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,255,0.4); }
+::selection { background: rgba(0,229,255,0.2); }
+
+/* ── Typography ── */
+h1,h2,h3,h4,h5 { font-family: var(--font-head); line-height: 1.1; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ── Layout ── */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+.section { padding: 110px 0; }
+
+/* ── Gradient Text ── */
+.gt {
+  background: linear-gradient(110deg, var(--c) 0%, var(--g) 60%, var(--c) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer { to { background-position: 200% center; } }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-head); font-weight: 700; font-size: 0.88rem; letter-spacing: 0.04em;
+  padding: 13px 30px; border-radius: 8px;
+  border: none; cursor: none; position: relative;
+  transition: all 0.25s ease; overflow: hidden;
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.07);
+  transform: translateX(-100%) skewX(-15deg);
+  transition: transform 0.4s ease;
+}
+.btn:hover::before { transform: translateX(110%) skewX(-15deg); }
+
+.btn-primary {
+  background: linear-gradient(120deg, #00e5ff, #00ff9d);
+  color: #040e10;
+  box-shadow: 0 0 30px rgba(0,229,255,0.3), 0 0 60px rgba(0,255,157,0.1);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px rgba(0,229,255,0.5), 0 0 80px rgba(0,255,157,0.2);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--w);
+  border: 1px solid var(--border2);
+}
+.btn-outline:hover { border-color: var(--c); color: var(--c); background: rgba(0,229,255,0.05); }
+
+.btn-ghost {
+  background: transparent; color: var(--c);
+  font-family: var(--font-head); font-weight: 600;
+  font-size: 0.88rem; padding: 0; border: none; cursor: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: gap 0.2s;
+}
+.btn-ghost:hover { gap: 12px; }
+
+.btn.lg { padding: 16px 38px; font-size: 0.95rem; }
+
+/* ── Section Header ── */
+.sec-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--c);
+  background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.2);
+  border-radius: 100px; padding: 5px 16px; margin-bottom: 20px;
+}
+.sec-tag::before { content: '//'; opacity: 0.5; }
+
+.sec-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 18px; }
+.sec-desc { font-size: 1rem; color: var(--muted2); line-height: 1.75; max-width: 540px; }
+
+/* ══════════════════════════════════════════
+   CANVAS PARTICLE BACKGROUND
+══════════════════════════════════════════ */
+#bg-canvas {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ══════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  background: rgba(7,10,13,0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.nav.solid { background: rgba(7,10,13,0.97); border-color: var(--border2); }
+
+.nav-inner {
+  max-width: 1240px; margin: 0 auto; padding: 0 28px;
+  height: 100%; display: flex; align-items: center; gap: 0;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-head); font-weight: 800; font-size: 1.35rem;
+  letter-spacing: -0.03em; margin-right: auto;
+}
+.nav-logo-hex {
+  width: 32px; height: 32px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-hex svg { position: absolute; }
+.nav-logo-hex .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 10px var(--c);
+  animation: pulse-dot 2s ease infinite;
+  position: relative; z-index: 1;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 10px var(--c); }
+  50% { box-shadow: 0 0 20px var(--c), 0 0 40px rgba(0,229,255,0.4); }
+}
+.nav-logo-text em { color: var(--c); font-style: normal; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 36px;
+  font-size: 0.85rem; font-weight: 500;
+}
+.nav-links a {
+  color: var(--muted2); transition: color 0.2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, var(--c), var(--g));
+  transform: scaleX(0); transition: transform 0.2s; border-radius: 1px;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--w); }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+.nav-cta {
+  margin-left: 40px; display: flex; align-items: center; gap: 12px;
+}
+.nav-demo {
+  font-family: var(--font-head); font-weight: 700;
+  font-size: 0.82rem; padding: 8px 20px;
+  background: linear-gradient(120deg, var(--c), var(--g));
+  color: #040e10; border-radius: 7px; cursor: none;
+  transition: all 0.2s;
+  box-shadow: 0 0 20px rgba(0,229,255,0.2);
+}
+.nav-demo:hover { transform: translateY(-1px); box-shadow: 0 0 35px rgba(0,229,255,0.4); }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: none; padding: 4px; }
+.hamburger span { width: 22px; height: 1.5px; background: var(--w); border-radius: 1px; transition: all 0.3s; }
+
+/* Mobile nav */
+.mobile-nav {
+  display: none;
+  position: fixed; top: var(--nav-h); left: 0; right: 0;
+  background: rgba(7,10,13,0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border2);
+  padding: 24px 28px 32px;
+  z-index: 999;
+  flex-direction: column; gap: 20px;
+}
+.mobile-nav.open { display: flex; animation: slideDown 0.3s ease; }
+@keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+.mobile-nav a { font-size: 1.1rem; font-weight: 600; color: var(--muted2); padding: 8px 0; border-bottom: 1px solid var(--border); }
+.mobile-nav a:last-child { border: none; }
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: calc(var(--nav-h) + 60px) 0 80px;
+  position: relative; overflow: hidden;
+}
+
+/* Hex grid background */
+.hero-hexgrid {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,2 58,17 58,47 30,52 2,47 2,17' fill='none' stroke='%2300e5ff' stroke-width='0.8'/%3E%3C/svg%3E");
+  background-size: 60px 52px;
+}
+
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  position: relative; z-index: 2;
+}
+
+/* Status pill */
+.hero-status {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.18);
+  border-radius: 100px; padding: 7px 18px;
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--c);
+  margin-bottom: 28px;
+  animation: fadeUp 0.7s ease both;
+}
+.hero-status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--g); box-shadow: 0 0 10px var(--g);
+  animation: blink 2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+.hero-h1 {
+  font-size: clamp(3rem, 5vw, 5rem); font-weight: 800;
+  letter-spacing: -0.04em; line-height: 1.02;
+  margin-bottom: 24px;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+
+.hero-sub {
+  font-size: 1.08rem; color: var(--muted2); line-height: 1.8;
+  max-width: 480px; margin-bottom: 40px;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+
+.hero-btns {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 56px;
+  animation: fadeUp 0.7s ease 0.3s both;
+}
+
+/* Stat bar */
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--r);
+  overflow: hidden;
+  animation: fadeUp 0.7s ease 0.4s both;
+}
+.hero-stat {
+  background: var(--bg1); padding: 20px 24px;
+  position: relative; overflow: hidden;
+}
+.hero-stat::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c), transparent);
+  opacity: 0.4;
+}
+.hero-stat-n {
+  font-family: var(--font-head); font-size: 2rem; font-weight: 800;
+  color: var(--c); line-height: 1;
+  text-shadow: 0 0 20px rgba(0,229,255,0.5);
+  margin-bottom: 4px;
+}
+.hero-stat-l { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+
+/* Hero Visual — Dashboard Mockup */
+.hero-visual {
+  position: relative; animation: fadeRight 1s ease 0.2s both;
+}
+
+.hero-card-glow {
+  position: absolute; inset: -40px;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,229,255,0.1), transparent);
+  pointer-events: none;
+}
+
+.dash-mock {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,229,255,0.06);
+  position: relative;
+}
+.dash-mock::before {
+  content: ''; position: absolute; inset: 0; border-radius: var(--r2);
+  background: linear-gradient(135deg, rgba(0,229,255,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.dm-titlebar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+}
+.dm-dots { display: flex; gap: 6px; }
+.dm-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.dm-dots span:nth-child(1) { background: #ff5f57; }
+.dm-dots span:nth-child(2) { background: #febc2e; }
+.dm-dots span:nth-child(3) { background: #28c840; }
+.dm-title { flex: 1; text-align: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.dm-live { font-family: var(--font-mono); font-size: 0.68rem; color: var(--g); display: flex; align-items: center; gap: 5px; }
+.dm-live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--g); box-shadow: 0 0 6px var(--g); animation: blink 2s infinite; }
+
+.dm-body { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+
+/* KPI row */
+.dm-kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.dm-kpi {
+  background: rgba(0,0,0,0.25); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 12px;
+}
+.dm-kpi-v { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 500; color: var(--c); margin-bottom: 3px; }
+.dm-kpi-l { font-size: 0.65rem; color: var(--muted); margin-bottom: 5px; }
+.dm-kpi-d { font-family: var(--font-mono); font-size: 0.62rem; color: var(--g); }
+.dm-kpi-d.neg { color: var(--danger); }
+
+/* Animated bar chart */
+.dm-chart-wrap { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.dm-chart-head { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--muted); margin-bottom: 12px; font-family: var(--font-mono); }
+.dm-bars { display: flex; align-items: flex-end; gap: 6px; height: 72px; }
+.dm-bar {
+  flex: 1; border-radius: 3px 3px 0 0;
+  background: rgba(0,229,255,0.12);
+  position: relative; transition: background 0.3s;
+  animation: growBar 1.2s ease both;
+}
+.dm-bar.hi { background: linear-gradient(180deg, var(--c), rgba(0,229,255,0.15)); box-shadow: 0 0 10px rgba(0,229,255,0.3); }
+.dm-bar:hover { background: rgba(0,229,255,0.25); }
+.dm-bar span { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.55rem; color: var(--muted); }
+@keyframes growBar { from { transform: scaleY(0); transform-origin: bottom; } to { transform: scaleY(1); } }
+
+/* Sparkline + donut row */
+.dm-row2 { display: grid; grid-template-columns: 80px 1fr; gap: 12px; align-items: center; }
+.dm-donut { text-align: center; }
+.dm-sparks { display: flex; flex-direction: column; gap: 10px; }
+.dm-spark { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); }
+.dm-spark svg { flex: 1; overflow: visible; }
+.dm-spark-l { min-width: 40px; }
+.dm-spark-v { min-width: 36px; text-align: right; color: var(--c); }
+
+/* Floating indicator badges */
+.dm-badge {
+  position: absolute;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 10px 14px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: float 5s ease-in-out infinite;
+}
+.dm-badge-1 { top: -24px; right: -24px; animation-delay: 0s; }
+.dm-badge-2 { bottom: 30px; left: -32px; animation-delay: -2.5s; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.dm-badge-icon { font-size: 0.85rem; margin-bottom: 4px; }
+.dm-badge-v { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 500; color: var(--g); }
+.dm-badge-l { font-size: 0.6rem; color: var(--muted); margin-top: 2px; }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted);
+  z-index: 2; animation: fadeUp 1s ease 1s both;
+}
+.scroll-mouse {
+  width: 22px; height: 34px; border: 1px solid var(--border2); border-radius: 11px;
+  display: flex; justify-content: center; padding-top: 6px;
+}
+.scroll-wheel {
+  width: 3px; height: 7px; border-radius: 2px; background: var(--c);
+  animation: scrollWheel 1.8s ease infinite;
+}
+@keyframes scrollWheel { 0%{transform:translateY(0);opacity:1} 100%{transform:translateY(14px);opacity:0} }
+
+/* ══════════════════════════════════════════
+   MARQUEE
+══════════════════════════════════════════ */
+.marquee-strip {
+  position: relative; z-index: 2;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.3);
+  padding: 14px 0; overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 0; align-items: center;
+  animation: marquee 35s linear infinite;
+  white-space: nowrap; width: max-content;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 28px; padding: 0 28px;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.marquee-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--c); opacity: 0.5; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ══════════════════════════════════════════
+   INDUSTRIES GRID
+══════════════════════════════════════════ */
+.ind-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--r2);
+  overflow: hidden; margin-top: 64px;
+}
+
+.ind-cell {
+  background: var(--bg1); padding: 36px 32px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+  cursor: none;
+}
+.ind-cell::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,229,255,0.05), transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.ind-cell:hover { background: var(--bg2); }
+.ind-cell:hover::before { opacity: 1; }
+.ind-cell:hover .ind-arrow { opacity: 1; transform: translate(0,0); }
+
+.ind-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 20px;
+  transition: all 0.3s;
+}
+.ind-cell:hover .ind-icon { background: rgba(0,229,255,0.14); border-color: rgba(0,229,255,0.3); box-shadow: 0 0 20px rgba(0,229,255,0.1); }
+
+.ind-cell h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+.ind-cell p { font-size: 0.83rem; color: var(--muted2); line-height: 1.65; margin-bottom: 20px; }
+
+.ind-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.ind-tag {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.05em;
+  color: var(--c); background: rgba(0,229,255,0.07);
+  border: 1px solid rgba(0,229,255,0.14); border-radius: 4px; padding: 3px 8px;
+}
+
+.ind-arrow {
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--c);
+  opacity: 0; transform: translate(-8px, 4px);
+  transition: all 0.3s ease;
+}
+
+/* ══════════════════════════════════════════
+   PROCESS STEPS
+══════════════════════════════════════════ */
+.process-section { background: var(--bg1); }
+
+.process-timeline {
+  position: relative; margin-top: 70px;
+}
+.process-line {
+  position: absolute; left: 32px; top: 32px; bottom: 32px; width: 1px;
+  background: linear-gradient(180deg, var(--c), var(--g), transparent);
+  opacity: 0.3;
+}
+
+.process-steps { display: flex; flex-direction: column; gap: 0; }
+.process-step {
+  display: grid; grid-template-columns: 64px 1fr;
+  gap: 32px; padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.process-step:last-child { border-bottom: none; }
+.process-step:hover .ps-num { border-color: var(--c); box-shadow: 0 0 20px rgba(0,229,255,0.2); }
+
+.ps-num {
+  width: 64px; height: 64px; border-radius: 16px;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 500;
+  color: var(--c); flex-shrink: 0; position: relative; z-index: 1;
+  transition: all 0.3s;
+}
+
+.ps-content { padding-top: 8px; }
+.ps-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.ps-content p { font-size: 0.875rem; color: var(--muted2); line-height: 1.75; max-width: 540px; }
+
+.ps-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.ps-chip {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  color: var(--muted2); background: var(--bg2);
+  border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px;
+}
+
+/* ══════════════════════════════════════════
+   PORTFOLIO
+══════════════════════════════════════════ */
+.portfolio-section { overflow: hidden; }
+
+.port-filters {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 48px 0 40px;
+}
+.port-filter {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 7px;
+  background: var(--bg1); border: 1px solid var(--border);
+  color: var(--muted2); cursor: none; transition: all 0.2s;
+}
+.port-filter.active, .port-filter:hover {
+  background: rgba(0,229,255,0.08); border-color: var(--border2); color: var(--c);
+}
+
+.port-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.port-card {
+  border-radius: var(--r); overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg1);
+  transition: all 0.35s ease; cursor: none;
+  position: relative;
+}
+.port-card:hover {
+  border-color: var(--border2); transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,229,255,0.06);
+}
+
+.port-img {
+  aspect-ratio: 16/9; background: var(--bg2);
+  position: relative; overflow: hidden;
+}
+.port-img-ph {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; color: var(--muted);
+}
+.port-img-ph .ph-icon { font-size: 2rem; opacity: 0.2; }
+.port-img-ph .ph-label { font-family: var(--font-mono); font-size: 0.65rem; opacity: 0.3; text-transform: uppercase; letter-spacing: 0.1em; }
+.port-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.port-card:hover .port-img img { transform: scale(1.06); }
+
+.port-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(7,10,13,0.9));
+  opacity: 0; transition: opacity 0.3s;
+  display: flex; align-items: flex-end; padding: 16px;
+}
+.port-card:hover .port-overlay { opacity: 1; }
+.port-overlay-text { font-family: var(--font-mono); font-size: 0.68rem; color: var(--c); }
+
+.port-info { padding: 20px; }
+.port-cat {
+  font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--g); background: rgba(0,255,157,0.07);
+  border-radius: 4px; padding: 3px 8px; display: inline-block; margin-bottom: 10px;
+}
+.port-info h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.port-info p { font-size: 0.8rem; color: var(--muted2); line-height: 1.6; }
+
+/* Upload drop zone */
+.upload-zone {
+  border: 2px dashed rgba(0,229,255,0.2);
+  border-radius: var(--r2); padding: 56px 40px;
+  text-align: center; background: rgba(0,229,255,0.02);
+  cursor: none; transition: all 0.3s; margin: 48px 0 0;
+  position: relative; overflow: hidden;
+}
+.upload-zone::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,229,255,0.04), transparent);
+  pointer-events: none;
+}
+.upload-zone:hover, .upload-zone.drag-over {
+  border-color: var(--c); background: rgba(0,229,255,0.05);
+  box-shadow: 0 0 60px rgba(0,229,255,0.08);
+}
+.uz-icon { font-size: 2.8rem; margin-bottom: 16px; opacity: 0.5; }
+.upload-zone h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.upload-zone p { font-size: 0.85rem; color: var(--muted2); }
+.uz-hint { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-top: 6px !important; }
+.uz-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-weight: 500; font-size: 0.8rem;
+  letter-spacing: 0.05em; padding: 9px 22px;
+  border: 1px solid var(--border2); border-radius: 7px;
+  background: transparent; color: var(--c); cursor: none;
+  transition: all 0.2s; margin-top: 20px;
+}
+.uz-btn:hover { background: rgba(0,229,255,0.08); border-color: var(--c); }
+
+/* ══════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════ */
+.services-section { background: var(--bg1); }
+
+.svc-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 20px; margin-top: 64px;
+}
+
+.svc-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 32px;
+  position: relative; overflow: hidden;
+  transition: all 0.3s; cursor: none;
+}
+.svc-card::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c), transparent);
+  transform: scaleX(0); transition: transform 0.4s ease;
+}
+.svc-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+.svc-card:hover::after { transform: scaleX(1); }
+.svc-card.featured {
+  border-color: rgba(0,229,255,0.25);
+  background: linear-gradient(135deg, rgba(0,229,255,0.04) 0%, var(--bg2) 60%);
+}
+
+.svc-n { font-family: var(--font-mono); font-size: 0.65rem; color: var(--c); letter-spacing: 0.1em; margin-bottom: 12px; opacity: 0.7; }
+.svc-icon { font-size: 1.6rem; margin-bottom: 16px; }
+.svc-card h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 12px; }
+.svc-card > p { font-size: 0.83rem; color: var(--muted2); line-height: 1.7; margin-bottom: 20px; }
+
+.svc-list { display: flex; flex-direction: column; gap: 8px; }
+.svc-list li {
+  font-size: 0.8rem; color: var(--muted2);
+  display: flex; align-items: center; gap: 8px;
+}
+.svc-list li::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--c); flex-shrink: 0;
+  box-shadow: 0 0 4px var(--c);
+}
+
+/* ══════════════════════════════════════════
+   TECH STACK
+══════════════════════════════════════════ */
+.stack-section { background: var(--bg); }
+.stack-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; justify-content: center; }
+.stack-badge {
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500;
+  padding: 10px 20px; border-radius: 8px;
+  background: var(--bg1); border: 1px solid var(--border);
+  color: var(--muted2); transition: all 0.2s; cursor: none;
+}
+.stack-badge:hover { border-color: var(--c); color: var(--c); background: rgba(0,229,255,0.06); box-shadow: 0 0 16px rgba(0,229,255,0.1); }
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════ */
+.testi-section { background: var(--bg1); }
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 64px; }
+
+.testi-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 32px;
+  transition: all 0.3s;
+}
+.testi-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+.testi-card.feat {
+  border-color: rgba(0,229,255,0.25);
+  background: linear-gradient(135deg, rgba(0,229,255,0.04), var(--bg2));
+  box-shadow: 0 0 40px rgba(0,229,255,0.06);
+}
+.testi-stars { color: var(--c); font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 16px; text-shadow: 0 0 8px rgba(0,229,255,0.4); }
+.testi-card p { font-size: 0.875rem; color: var(--muted2); font-style: italic; line-height: 1.8; margin-bottom: 24px; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-av {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--c), var(--g));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 800; color: #040e10;
+  flex-shrink: 0;
+}
+.testi-author strong { display: block; font-size: 0.88rem; margin-bottom: 2px; }
+.testi-author small { font-size: 0.73rem; color: var(--muted); font-family: var(--font-mono); }
+
+/* ══════════════════════════════════════════
+   ABOUT SPLIT
+══════════════════════════════════════════ */
+.about-section {}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+.about-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.about-stat-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 28px 24px;
+  text-align: center; transition: all 0.3s;
+}
+.about-stat-card:hover { border-color: var(--border2); }
+.about-stat-card.c1 { border-color: rgba(0,229,255,0.2); background: linear-gradient(135deg, rgba(0,229,255,0.05), var(--bg1)); }
+.about-stat-card.c2 { border-color: rgba(0,255,157,0.2); background: linear-gradient(135deg, rgba(0,255,157,0.05), var(--bg1)); }
+.asc-n { font-family: var(--font-head); font-size: 2.4rem; font-weight: 800; color: var(--c); text-shadow: 0 0 20px rgba(0,229,255,0.4); line-height: 1; }
+.asc-n.green { color: var(--g); text-shadow: 0 0 20px rgba(0,255,157,0.4); }
+.asc-l { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-top: 6px; letter-spacing: 0.05em; }
+
+.about-values { display: flex; flex-direction: column; gap: 20px; margin-top: 36px; }
+.about-val {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 18px 20px; border-radius: var(--r);
+  background: var(--bg1); border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.about-val:hover { border-color: var(--border2); background: var(--bg2); }
+.av-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--c); box-shadow: 0 0 8px var(--c);
+  flex-shrink: 0; margin-top: 5px;
+}
+.about-val strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.about-val p { font-size: 0.8rem; color: var(--muted2); line-height: 1.6; margin: 0; }
+
+/* ══════════════════════════════════════════
+   CONTACT / CTA
+══════════════════════════════════════════ */
+.contact-section { background: var(--bg1); }
+.contact-grid { display: grid; grid-template-columns: 1fr 400px; gap: 64px; align-items: start; margin-top: 64px; }
+
+/* Form */
+.contact-form { display: flex; flex-direction: column; gap: 0; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cf-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.cf-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.cf-input, .cf-select, .cf-textarea {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 13px 16px;
+  color: var(--w); font-family: var(--font-body); font-size: 0.88rem;
+  transition: all 0.2s; outline: none; width: 100%;
+}
+.cf-input:focus, .cf-select:focus, .cf-textarea:focus {
+  border-color: var(--c);
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.1), 0 0 20px rgba(0,229,255,0.06);
+}
+.cf-input::placeholder, .cf-textarea::placeholder { color: var(--muted); }
+.cf-textarea { min-height: 120px; resize: vertical; }
+.cf-select option { background: var(--bg2); }
+.cf-submit { width: 100%; justify-content: center; margin-top: 8px; }
+
+/* Info panel */
+.cinfo-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 28px; margin-bottom: 16px;
+}
+.cinfo-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 20px; }
+.cinfo-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
+.ci-ico {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.16);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0;
+}
+.cinfo-item strong { display: block; font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 3px; text-transform: uppercase; }
+.cinfo-item span, .cinfo-item a { font-size: 0.85rem; color: var(--muted2); }
+.cinfo-item a:hover { color: var(--c); }
+
+.next-steps { display: flex; flex-direction: column; gap: 14px; }
+.ns { display: flex; gap: 14px; align-items: flex-start; }
+.ns-n {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--c), var(--g));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+  color: #040e10; flex-shrink: 0;
+}
+.ns strong { display: block; font-size: 0.85rem; margin-bottom: 3px; }
+.ns p { font-size: 0.78rem; color: var(--muted2); line-height: 1.5; margin: 0; }
+
+/* ══════════════════════════════════════════
+   CTA BANNER
+══════════════════════════════════════════ */
+.cta-band {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 100px 0; position: relative; overflow: hidden;
+  text-align: center;
+}
+.cta-band-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,229,255,0.07), transparent);
+}
+.cta-band h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; margin-bottom: 16px; }
+.cta-band p { font-size: 1rem; color: var(--muted2); margin-bottom: 36px; }
+.cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.footer {
+  background: var(--bg); border-top: 1px solid var(--border);
+  padding: 72px 0 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 56px;
+}
+.footer-brand p { font-size: 0.85rem; color: var(--muted2); margin: 14px 0 22px; line-height: 1.7; max-width: 280px; }
+.footer-socials { display: flex; gap: 10px; }
+.footer-soc {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--border); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700; color: var(--muted);
+  transition: all 0.2s; cursor: none;
+}
+.footer-soc:hover { border-color: var(--c); color: var(--c); background: rgba(0,229,255,0.08); }
+.footer-col h4 { font-family: var(--font-head); font-size: 0.85rem; font-weight: 700; margin-bottom: 18px; }
+.footer-col ul { display: flex; flex-direction: column; gap: 11px; }
+.footer-col a { font-size: 0.83rem; color: var(--muted2); transition: color 0.2s; }
+.footer-col a:hover { color: var(--w); }
+.footer-bot {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 24px; border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted);
+}
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a:hover { color: var(--w); }
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeRight { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:translateX(0)} }
+
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ══════════════════════════════════════════
+   FORM SUCCESS
+══════════════════════════════════════════ */
+.form-success {
+  text-align: center; padding: 48px 32px;
+  background: rgba(0,255,157,0.04);
+  border: 1px solid rgba(0,255,157,0.2); border-radius: var(--r);
+  display: none;
+}
+.form-success.show { display: block; animation: fadeUp 0.5s ease; }
+.success-check { font-size: 2.5rem; margin-bottom: 16px; }
+.form-success h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.form-success p { font-size: 0.875rem; color: var(--muted2); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:1100px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { order: -1; max-width: 540px; margin: 0 auto; }
+  .ind-grid { grid-template-columns: repeat(2,1fr); }
+  .port-grid { grid-template-columns: repeat(2,1fr); }
+  .svc-grid { grid-template-columns: repeat(2,1fr); }
+  .testi-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .hero { padding-top: calc(var(--nav-h) + 40px); }
+  .hero-h1 { font-size: 2.6rem; }
+  .ind-grid { grid-template-columns: 1fr; }
+  .port-grid { grid-template-columns: 1fr; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .cf-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bot { flex-direction: column; gap: 16px; text-align: center; }
+  .about-stats-grid { grid-template-columns: 1fr 1fr; }
+  .cta-btns { flex-direction: column; align-items: center; }
+}
+@media(max-width:480px) {
+  .container { padding: 0 18px; }
+  .section { padding: 72px 0; }
+  .hero-btns { flex-direction: column; }
+}
+</style>
 </head>
 <body>
 
-<!-- ═══════════ NAVBAR ═══════════ -->
-<nav class="navbar" id="navbar">
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Particle Canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<nav class="nav" id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <span class="logo-mark">⬡</span>
-      <span class="logo-text">Vizy<em>tech</em></span>
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-hex">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <polygon points="16,2 29,9 29,23 16,30 3,23 3,9" stroke="rgba(0,229,255,0.35)" stroke-width="1" fill="rgba(0,229,255,0.04)"/>
+        </svg>
+        <div class="dot"></div>
+      </div>
+      <span class="nav-logo-text">Vizy<em>tech</em></span>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="pages/about.html">About</a></li>
-      <li><a href="pages/services.html">Services</a></li>
-      <li><a href="pages/portfolio.html">Portfolio</a></li>
-      <li><a href="pages/industries.html">Industries</a></li>
-      <li><a href="pages/contact.html">Contact</a></li>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="pages/contact.html" class="btn-nav">Get a Demo</a>
+    <div class="nav-cta">
+      <a href="#contact" class="nav-demo">Get a Demo</a>
+    </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="grid-overlay"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Trusted by 120+ enterprises worldwide
-    </div>
-    <h1 class="hero-title">
-      Visionary Tech,<br/>
-      <span class="gradient-text">Visible Results.</span>
-    </h1>
-    <p class="hero-sub">
-      We build visionary, industry-specific dashboards that transform raw data into decisive intelligence — crafted precisely for your sector, your KPIs, your people.
-    </p>
-    <div class="hero-cta">
-      <a href="pages/portfolio.html" class="btn-primary">View Our Work</a>
-      <a href="pages/contact.html" class="btn-ghost">Book a Free Consultation →</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><strong>150+</strong><span>Dashboards Delivered</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><strong>18+</strong><span>Industries Served</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><strong>98%</strong><span>Client Satisfaction</span></div>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="dashboard-preview">
-      <div class="dp-header">
-        <div class="dp-dots"><span></span><span></span><span></span></div>
-        <div class="dp-title">Analytics Overview</div>
-        <div class="dp-badge">● Live</div>
-      </div>
-      <div class="dp-body">
-        <div class="dp-kpis">
-          <div class="dp-kpi"><div class="kpi-val">$2.4M</div><div class="kpi-lbl">Revenue</div><div class="kpi-chg up">↑ 12.4%</div></div>
-          <div class="dp-kpi"><div class="kpi-val">8,420</div><div class="kpi-lbl">Users</div><div class="kpi-chg up">↑ 8.1%</div></div>
-          <div class="dp-kpi"><div class="kpi-val">94.2%</div><div class="kpi-lbl">Uptime</div><div class="kpi-chg up">↑ 2.3%</div></div>
+<!-- Mobile nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#home">Home</a>
+  <a href="#industries">Industries</a>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" style="color:var(--c)">→ Get a Demo</a>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="home">
+  <div class="hero-hexgrid"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Left: Content -->
+      <div class="hero-content">
+        <div class="hero-status">
+          <div class="hero-status-dot"></div>
+          <span>120+ Enterprises Served — Live Dashboards</span>
         </div>
-        <div class="dp-chart">
-          <div class="chart-bars">
-            <div class="bar" style="--h:55%"><span>Jan</span></div>
-            <div class="bar" style="--h:72%"><span>Feb</span></div>
-            <div class="bar" style="--h:60%"><span>Mar</span></div>
-            <div class="bar" style="--h:85%"><span>Apr</span></div>
-            <div class="bar" style="--h:70%"><span>May</span></div>
-            <div class="bar active" style="--h:95%"><span>Jun</span></div>
-          </div>
+
+        <h1 class="hero-h1">
+          Visionary Tech,<br/>
+          <span class="gt">Visible Results.</span>
+        </h1>
+
+        <p class="hero-sub">
+          We build precision-engineered, industry-specific dashboards that transform raw data into decisive intelligence — crafted for your sector, your KPIs, your team.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#portfolio" class="btn btn-primary lg">View Our Work</a>
+          <a href="#contact" class="btn btn-outline lg">Book Free Consultation →</a>
         </div>
-        <div class="dp-row2">
-          <div class="dp-donut">
-            <svg viewBox="0 0 80 80">
-              <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"/>
-              <circle cx="40" cy="40" r="30" fill="none" stroke="url(#dg)" stroke-width="12" stroke-dasharray="113 75" stroke-linecap="round" transform="rotate(-90 40 40)"/>
-              <defs><linearGradient id="dg" x1="0%" y1="0%" x2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#00ff9d"/></linearGradient></defs>
-              <text x="40" y="45" text-anchor="middle" fill="white" font-size="13" font-weight="700">60%</text>
-            </svg>
-            <div class="donut-lbl">Conversion</div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-n" data-target="150" data-suffix="+">0+</div>
+            <div class="hero-stat-l">// dashboards delivered</div>
           </div>
-          <div class="dp-sparklines">
-            <div class="spark-row"><span>Sales</span><svg viewBox="0 0 100 30"><polyline points="0,25 20,15 40,20 60,5 80,12 100,8" fill="none" stroke="#00e5ff" stroke-width="2"/></svg></div>
-            <div class="spark-row"><span>Traffic</span><svg viewBox="0 0 100 30"><polyline points="0,20 20,22 40,10 60,18 80,8 100,14" fill="none" stroke="#3b82f6" stroke-width="2"/></svg></div>
-            <div class="spark-row"><span>Leads</span><svg viewBox="0 0 100 30"><polyline points="0,28 20,18 40,24 60,10 80,16 100,6" fill="none" stroke="#00ff9d" stroke-width="2"/></svg></div>
+          <div class="hero-stat">
+            <div class="hero-stat-n" data-target="18" data-suffix="+">0+</div>
+            <div class="hero-stat-l">// industries served</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-n" data-target="98" data-suffix="%">0%</div>
+            <div class="hero-stat-l">// client satisfaction</div>
           </div>
         </div>
       </div>
+
+      <!-- Right: Dashboard Mockup -->
+      <div class="hero-visual">
+        <div class="hero-card-glow"></div>
+
+        <!-- Floating badges -->
+        <div class="dm-badge dm-badge-1">
+          <div class="dm-badge-icon">📈</div>
+          <div class="dm-badge-v">+24.8%</div>
+          <div class="dm-badge-l">Revenue Growth</div>
+        </div>
+        <div class="dm-badge dm-badge-2">
+          <div class="dm-badge-icon">⚡</div>
+          <div class="dm-badge-v">Real-time</div>
+          <div class="dm-badge-l">Live Data Stream</div>
+        </div>
+
+        <div class="dash-mock">
+          <!-- Title bar -->
+          <div class="dm-titlebar">
+            <div class="dm-dots"><span></span><span></span><span></span></div>
+            <div class="dm-title">Vizytech Analytics — Executive Overview</div>
+            <div class="dm-live"><div class="dm-live-dot"></div>Live</div>
+          </div>
+
+          <!-- Body -->
+          <div class="dm-body">
+            <!-- KPIs -->
+            <div class="dm-kpis">
+              <div class="dm-kpi">
+                <div class="dm-kpi-v">₹4.2Cr</div>
+                <div class="dm-kpi-l">Revenue MTD</div>
+                <div class="dm-kpi-d">↑ 18.4% vs last month</div>
+              </div>
+              <div class="dm-kpi">
+                <div class="dm-kpi-v">12,840</div>
+                <div class="dm-kpi-l">Active Users</div>
+                <div class="dm-kpi-d">↑ 9.2% this week</div>
+              </div>
+              <div class="dm-kpi">
+                <div class="dm-kpi-v">99.4%</div>
+                <div class="dm-kpi-l">Uptime</div>
+                <div class="dm-kpi-d neg">↓ 0.1% vs SLA</div>
+              </div>
+            </div>
+
+            <!-- Bar Chart -->
+            <div class="dm-chart-wrap">
+              <div class="dm-chart-head">
+                <span>Monthly Revenue (₹ Cr)</span>
+                <span style="color:var(--c)">2024–25</span>
+              </div>
+              <div class="dm-bars">
+                <div class="dm-bar" style="height:58%"><span>Jul</span></div>
+                <div class="dm-bar" style="height:71%"><span>Aug</span></div>
+                <div class="dm-bar" style="height:63%"><span>Sep</span></div>
+                <div class="dm-bar" style="height:80%"><span>Oct</span></div>
+                <div class="dm-bar" style="height:68%"><span>Nov</span></div>
+                <div class="dm-bar" style="height:88%"><span>Dec</span></div>
+                <div class="dm-bar hi" style="height:100%"><span>Jan</span></div>
+              </div>
+            </div>
+
+            <!-- Donut + Sparklines -->
+            <div class="dm-row2">
+              <div class="dm-donut">
+                <svg viewBox="0 0 80 80" width="80" height="80">
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="10"/>
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="url(#dg1)" stroke-width="10" stroke-dasharray="105 71" stroke-linecap="round" transform="rotate(-90 40 40)"/>
+                  <defs><linearGradient id="dg1" x1="0%" y1="0%" x2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#00ff9d"/></linearGradient></defs>
+                  <text x="40" y="44" text-anchor="middle" fill="white" font-family="DM Mono,monospace" font-size="11" font-weight="500">62%</text>
+                </svg>
+                <div style="font-size:0.55rem;color:var(--muted);margin-top:2px;text-align:center;font-family:var(--font-mono)">Conversion</div>
+              </div>
+              <div class="dm-sparks">
+                <div class="dm-spark">
+                  <span class="dm-spark-l">Sales</span>
+                  <svg viewBox="0 0 100 28" height="28">
+                    <polyline points="0,22 18,14 36,18 54,6 72,10 90,4 100,7" fill="none" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span class="dm-spark-v">+18%</span>
+                </div>
+                <div class="dm-spark">
+                  <span class="dm-spark-l">Traffic</span>
+                  <svg viewBox="0 0 100 28" height="28">
+                    <polyline points="0,20 18,22 36,10 54,16 72,7 90,12 100,9" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span class="dm-spark-v">+12%</span>
+                </div>
+                <div class="dm-spark">
+                  <span class="dm-spark-l">Leads</span>
+                  <svg viewBox="0 0 100 28" height="28">
+                    <polyline points="0,24 18,16 36,20 54,10 72,14 90,6 100,4" fill="none" stroke="#00ff9d" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span class="dm-spark-v">+31%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    <span>Scroll to explore</span>
+  <div class="scroll-cue">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>scroll to explore</span>
   </div>
 </section>
 
-<!-- ═══════════ MARQUEE ═══════════ -->
-<div class="marquee-wrap">
+<!-- ═══════ MARQUEE ═══════ -->
+<div class="marquee-strip">
   <div class="marquee-track">
-    <span>Healthcare Analytics</span><span class="sep">◈</span>
-    <span>Financial Dashboards</span><span class="sep">◈</span>
-    <span>Retail Intelligence</span><span class="sep">◈</span>
-    <span>Supply Chain Visibility</span><span class="sep">◈</span>
-    <span>HR & People Analytics</span><span class="sep">◈</span>
-    <span>Manufacturing KPIs</span><span class="sep">◈</span>
-    <span>Sales Performance</span><span class="sep">◈</span>
-    <span>Real-Time Monitoring</span><span class="sep">◈</span>
-    <span>Healthcare Analytics</span><span class="sep">◈</span>
-    <span>Financial Dashboards</span><span class="sep">◈</span>
-    <span>Retail Intelligence</span><span class="sep">◈</span>
-    <span>Supply Chain Visibility</span><span class="sep">◈</span>
+    <div class="marquee-item">Healthcare Analytics<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Financial Dashboards<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Retail Intelligence<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Supply Chain Visibility<div class="marquee-sep"></div></div>
+    <div class="marquee-item">HR & People Analytics<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Manufacturing KPIs<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Real-Time Monitoring<div class="marquee-sep"></div></div>
+    <div class="marquee-item">SaaS Metrics<div class="marquee-sep"></div></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">Healthcare Analytics<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Financial Dashboards<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Retail Intelligence<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Supply Chain Visibility<div class="marquee-sep"></div></div>
+    <div class="marquee-item">HR & People Analytics<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Manufacturing KPIs<div class="marquee-sep"></div></div>
+    <div class="marquee-item">Real-Time Monitoring<div class="marquee-sep"></div></div>
+    <div class="marquee-item">SaaS Metrics<div class="marquee-sep"></div></div>
   </div>
 </div>
 
-<!-- ═══════════ INDUSTRIES ═══════════ -->
-<section class="section industries-section">
+<!-- ═══════ INDUSTRIES ═══════ -->
+<section class="section" id="industries">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag">Industries We Serve</div>
-      <h2 class="section-title">Built for <span class="gradient-text">Every Sector</span></h2>
-      <p class="section-desc">No matter your industry, we deliver tailor-made dashboards that speak your language and solve your unique challenges.</p>
+    <div class="reveal">
+      <div class="sec-tag">Industries We Serve</div>
+      <h2 class="sec-title">Built for <span class="gt">Every Sector</span></h2>
+      <p class="sec-desc">No templates. No compromises. Every dashboard is precision-engineered for your industry's language, metrics, and decision cycles.</p>
     </div>
-    <div class="industry-grid">
-      <div class="industry-card" data-delay="0">
-        <div class="ic-icon">🏥</div>
+
+    <div class="ind-grid reveal">
+      <div class="ind-cell">
+        <div class="ind-icon">🏥</div>
         <h3>Healthcare</h3>
-        <p>Patient outcomes, operational efficiency, and compliance metrics in real-time.</p>
-        <a href="pages/industries.html" class="ic-link">Explore →</a>
+        <p>Patient outcomes, operational efficiency, and compliance metrics in real-time across departments.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Patient Flow</span>
+          <span class="ind-tag">Revenue Cycle</span>
+          <span class="ind-tag">Clinical KPIs</span>
+        </div>
+        <div class="ind-arrow">Explore →</div>
       </div>
-      <div class="industry-card" data-delay="1">
-        <div class="ic-icon">💰</div>
+      <div class="ind-cell">
+        <div class="ind-icon">💰</div>
         <h3>Finance & Banking</h3>
-        <p>Risk analytics, portfolio tracking, and regulatory reporting dashboards.</p>
-        <a href="pages/industries.html" class="ic-link">Explore →</a>
+        <p>Risk analytics, portfolio performance, and regulatory reporting dashboards built to compliance standards.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Risk Analytics</span>
+          <span class="ind-tag">Portfolio P&L</span>
+          <span class="ind-tag">Regulatory</span>
+        </div>
+        <div class="ind-arrow">Explore →</div>
       </div>
-      <div class="industry-card" data-delay="2">
-        <div class="ic-icon">🛒</div>
+      <div class="ind-cell">
+        <div class="ind-icon">🛒</div>
         <h3>Retail & E-commerce</h3>
-        <p>Sales performance, inventory intelligence, and customer behavior analytics.</p>
-        <a href="pages/industries.html" class="ic-link">Explore →</a>
+        <p>Unified sales, inventory intelligence, and customer journey analytics across every channel.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Omnichannel</span>
+          <span class="ind-tag">Inventory</span>
+          <span class="ind-tag">CLV</span>
+        </div>
+        <div class="ind-arrow">Explore →</div>
       </div>
-      <div class="industry-card" data-delay="3">
-        <div class="ic-icon">🏭</div>
+      <div class="ind-cell">
+        <div class="ind-icon">🏭</div>
         <h3>Manufacturing</h3>
-        <p>OEE tracking, production KPIs, and quality control monitoring systems.</p>
-        <a href="pages/industries.html" class="ic-link">Explore →</a>
+        <p>OEE tracking, production KPIs, and quality control monitoring across all production lines and shifts.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">OEE</span>
+          <span class="ind-tag">Downtime</span>
+          <span class="ind-tag">Quality</span>
+        </div>
+        <div class="ind-arrow">Explore →</div>
       </div>
-      <div class="industry-card" data-delay="4">
-        <div class="ic-icon">🚚</div>
+      <div class="ind-cell">
+        <div class="ind-icon">🚚</div>
         <h3>Logistics & Supply Chain</h3>
-        <p>Fleet tracking, warehouse performance, and delivery analytics at scale.</p>
-        <a href="pages/industries.html" class="ic-link">Explore →</a>
+        <p>Fleet tracking, warehouse performance, and last-mile delivery analytics at enterprise scale.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Fleet GPS</span>
+          <span class="ind-tag">Warehouse</span>
+          <span class="ind-tag">Delivery</span>
+        </div>
+        <div class="ind-arrow">Explore →</div>
       </div>
-      <div class="industry-card" data-delay="5">
-        <div class="ic-icon">📊</div>
-        <h3>SaaS & Tech</h3>
-        <p>Product metrics, user engagement, and growth tracking dashboards.</p>
-        <a href="pages/industries.html" class="ic-link">Explore →</a>
+      <div class="ind-cell">
+        <div class="ind-icon">📊</div>
+        <h3>SaaS & Technology</h3>
+        <p>Product metrics, user engagement, growth funnels, and infrastructure health monitoring.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Product Metrics</span>
+          <span class="ind-tag">Funnels</span>
+          <span class="ind-tag">Infra</span>
+        </div>
+        <div class="ind-arrow">Explore →</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<!-- ═══════ PROCESS ═══════ -->
 <section class="section process-section">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag">Our Process</div>
-      <h2 class="section-title">How We <span class="gradient-text">Deliver</span></h2>
+    <div class="reveal">
+      <div class="sec-tag">How We Work</div>
+      <h2 class="sec-title">From Brief to <span class="gt">Live Dashboard</span></h2>
     </div>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="ps-num">01</div>
-        <div class="ps-content">
-          <h3>Discovery & Analysis</h3>
-          <p>We deep-dive into your business workflows, KPIs, and pain points to define exactly what your dashboard must deliver.</p>
+    <div class="process-timeline reveal">
+      <div class="process-line"></div>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="ps-num">01</div>
+          <div class="ps-content">
+            <h3>Discovery & KPI Mapping</h3>
+            <p>We deep-dive into your business workflows, existing data sources, and decision-making needs. We interview stakeholders, audit your current reporting, and define a precise metric framework — before writing a single line of code.</p>
+            <div class="ps-chips">
+              <span class="ps-chip">Stakeholder interviews</span>
+              <span class="ps-chip">KPI framework design</span>
+              <span class="ps-chip">Data source audit</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="process-connector"></div>
-      <div class="process-step">
-        <div class="ps-num">02</div>
-        <div class="ps-content">
-          <h3>Data Architecture</h3>
-          <p>We map your data sources, design pipelines, and ensure clean, reliable data feeding your dashboards.</p>
+        <div class="process-step">
+          <div class="ps-num">02</div>
+          <div class="ps-content">
+            <h3>Data Architecture & Integration</h3>
+            <p>We map and connect your data sources — databases, APIs, ERPs, CRMs — into a clean, unified data pipeline. We design schemas, build ETL processes, and ensure your dashboard always sees accurate, up-to-date information.</p>
+            <div class="ps-chips">
+              <span class="ps-chip">ETL pipeline build</span>
+              <span class="ps-chip">API integrations</span>
+              <span class="ps-chip">Data warehouse setup</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="process-connector"></div>
-      <div class="process-step">
-        <div class="ps-num">03</div>
-        <div class="ps-content">
-          <h3>Design & Build</h3>
-          <p>Our designers and developers craft pixel-perfect, intuitive dashboards with real-time interactivity.</p>
+        <div class="process-step">
+          <div class="ps-num">03</div>
+          <div class="ps-content">
+            <h3>Design & Development</h3>
+            <p>Our designers craft wireframes and high-fidelity mockups tailored to your brand and user roles. Developers build interactive, performant dashboards with real-time refresh, role-based access, and mobile responsiveness.</p>
+            <div class="ps-chips">
+              <span class="ps-chip">UI/UX wireframes</span>
+              <span class="ps-chip">Iterative prototypes</span>
+              <span class="ps-chip">Role-based views</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="process-connector"></div>
-      <div class="process-step">
-        <div class="ps-num">04</div>
-        <div class="ps-content">
-          <h3>Deploy & Support</h3>
-          <p>We launch, train your team, and provide ongoing support to ensure peak performance.</p>
+        <div class="process-step">
+          <div class="ps-num">04</div>
+          <div class="ps-content">
+            <h3>Deploy, Train & Evolve</h3>
+            <p>We launch your dashboard, run live training sessions with your team, and provide documentation. Post-launch, we monitor performance, incorporate your feedback, and keep your dashboard evolving with your business.</p>
+            <div class="ps-chips">
+              <span class="ps-chip">Cloud deployment</span>
+              <span class="ps-chip">Team training</span>
+              <span class="ps-chip">Ongoing support</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ PORTFOLIO PREVIEW ═══════════ -->
-<section class="section portfolio-section">
+<!-- ═══════ PORTFOLIO ═══════ -->
+<section class="section portfolio-section" id="portfolio">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag">Portfolio</div>
-      <h2 class="section-title">Our <span class="gradient-text">Recent Work</span></h2>
-      <p class="section-desc">Upload your dashboard images and showcase what's possible.</p>
+    <div class="reveal">
+      <div class="sec-tag">Our Work</div>
+      <h2 class="sec-title">Dashboard <span class="gt">Portfolio</span></h2>
+      <p class="sec-desc">Every project tells a data story. Upload your own screenshots to showcase your work here.</p>
     </div>
-    <div class="portfolio-grid" id="portfolioGrid">
-      <div class="portfolio-card placeholder-card">
-        <div class="pc-inner">
-          <div class="pc-img-area">
-            <div class="pc-placeholder">
-              <span>🖼️</span>
-              <p>Dashboard Screenshot</p>
-            </div>
-          </div>
-          <div class="pc-info">
-            <div class="pc-tag">Healthcare</div>
-            <h3>Patient Flow Analytics</h3>
-            <p>Real-time hospital bed management and patient journey tracking.</p>
-          </div>
-        </div>
+
+    <div class="port-filters reveal">
+      <button class="port-filter active" data-filter="all">All</button>
+      <button class="port-filter" data-filter="healthcare">Healthcare</button>
+      <button class="port-filter" data-filter="finance">Finance</button>
+      <button class="port-filter" data-filter="retail">Retail</button>
+      <button class="port-filter" data-filter="manufacturing">Manufacturing</button>
+      <button class="port-filter" data-filter="logistics">Logistics</button>
+    </div>
+
+    <div class="port-grid" id="portGrid">
+      <div class="port-card" data-cat="healthcare">
+        <div class="port-img"><div class="port-img-ph"><div class="ph-icon">🏥</div><div class="ph-label">Healthcare Dashboard</div></div><div class="port-overlay"><span class="port-overlay-text">// Patient Flow Analytics</span></div></div>
+        <div class="port-info"><div class="port-cat">Healthcare</div><h3>Patient Flow Analytics</h3><p>Real-time bed management and patient journey tracking for a 500-bed hospital network.</p></div>
       </div>
-      <div class="portfolio-card placeholder-card">
-        <div class="pc-inner">
-          <div class="pc-img-area">
-            <div class="pc-placeholder">
-              <span>🖼️</span>
-              <p>Dashboard Screenshot</p>
-            </div>
-          </div>
-          <div class="pc-info">
-            <div class="pc-tag">Finance</div>
-            <h3>Investment Portfolio Tracker</h3>
-            <p>Multi-asset portfolio with risk metrics and performance benchmarks.</p>
-          </div>
-        </div>
+      <div class="port-card" data-cat="finance">
+        <div class="port-img"><div class="port-img-ph"><div class="ph-icon">💰</div><div class="ph-label">Finance Dashboard</div></div><div class="port-overlay"><span class="port-overlay-text">// Investment Portfolio Tracker</span></div></div>
+        <div class="port-info"><div class="port-cat">Finance</div><h3>Investment Portfolio Tracker</h3><p>Multi-asset portfolio with live risk metrics, benchmarks, and P&L visualization.</p></div>
       </div>
-      <div class="portfolio-card placeholder-card">
-        <div class="pc-inner">
-          <div class="pc-img-area">
-            <div class="pc-placeholder">
-              <span>🖼️</span>
-              <p>Dashboard Screenshot</p>
-            </div>
-          </div>
-          <div class="pc-info">
-            <div class="pc-tag">Retail</div>
-            <h3>Omni-Channel Sales Hub</h3>
-            <p>Unified sales tracking across online, in-store, and mobile channels.</p>
-          </div>
-        </div>
+      <div class="port-card" data-cat="retail">
+        <div class="port-img"><div class="port-img-ph"><div class="ph-icon">🛒</div><div class="ph-label">Retail Dashboard</div></div><div class="port-overlay"><span class="port-overlay-text">// Omni-Channel Sales Hub</span></div></div>
+        <div class="port-info"><div class="port-cat">Retail</div><h3>Omni-Channel Sales Hub</h3><p>Unified tracking across online, in-store, and mobile channels for a national retail chain.</p></div>
+      </div>
+      <div class="port-card" data-cat="manufacturing">
+        <div class="port-img"><div class="port-img-ph"><div class="ph-icon">🏭</div><div class="ph-label">Manufacturing Dashboard</div></div><div class="port-overlay"><span class="port-overlay-text">// OEE Production Monitor</span></div></div>
+        <div class="port-info"><div class="port-cat">Manufacturing</div><h3>OEE Production Monitor</h3><p>Overall Equipment Effectiveness with real-time machine performance and downtime alerts.</p></div>
+      </div>
+      <div class="port-card" data-cat="logistics">
+        <div class="port-img"><div class="port-img-ph"><div class="ph-icon">🚚</div><div class="ph-label">Logistics Dashboard</div></div><div class="port-overlay"><span class="port-overlay-text">// Fleet & Delivery Analytics</span></div></div>
+        <div class="port-info"><div class="port-cat">Logistics</div><h3>Fleet & Delivery Analytics</h3><p>GPS-integrated fleet performance and last-mile delivery tracking for a 3PL company.</p></div>
+      </div>
+      <div class="port-card" data-cat="healthcare">
+        <div class="port-img"><div class="port-img-ph"><div class="ph-icon">💊</div><div class="ph-label">Pharma Dashboard</div></div><div class="port-overlay"><span class="port-overlay-text">// Pharma Supply Monitor</span></div></div>
+        <div class="port-info"><div class="port-cat">Healthcare</div><h3>Pharma Supply Monitor</h3><p>Drug inventory, expiry tracking, and distribution analytics for a pharmaceutical chain.</p></div>
       </div>
     </div>
 
-    <!-- Upload Section -->
-    <div class="upload-zone" id="uploadZone">
+    <!-- Upload Zone -->
+    <div class="upload-zone reveal" id="uploadZone">
       <input type="file" id="fileInput" accept="image/*" multiple hidden/>
-      <div class="uz-inner" id="uzInner">
-        <div class="uz-icon">⬆</div>
-        <h3>Upload Your Dashboard Images</h3>
-        <p>Drag & drop screenshots here, or click to browse</p>
-        <p class="uz-hint">PNG, JPG, WEBP supported • Multiple files allowed</p>
-        <button class="btn-upload" onclick="document.getElementById('fileInput').click()">Choose Files</button>
-      </div>
-    </div>
-    <div class="portfolio-cta">
-      <a href="pages/portfolio.html" class="btn-primary">View Full Portfolio</a>
+      <div class="uz-icon">↑</div>
+      <h3>Upload Your Dashboard Screenshots</h3>
+      <p>Drag & drop images here to add them to the portfolio</p>
+      <p class="uz-hint">PNG · JPG · WEBP · Multiple files supported</p>
+      <button class="uz-btn" onclick="document.getElementById('fileInput').click()">
+        <span>Browse Files</span>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ TESTIMONIALS ═══════════ -->
-<section class="section testimonials-section">
+<!-- ═══════ SERVICES ═══════ -->
+<section class="section services-section" id="services">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag">Client Stories</div>
-      <h2 class="section-title">What Our <span class="gradient-text">Clients Say</span></h2>
+    <div class="reveal">
+      <div class="sec-tag">What We Build</div>
+      <h2 class="sec-title">End-to-End <span class="gt">Dashboard Solutions</span></h2>
+      <p class="sec-desc">Every layer of your analytics infrastructure, handled by one team that understands your industry.</p>
     </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="tc-stars">★★★★★</div>
-        <p>"The dashboard transformed how our executive team makes decisions. We can now spot trends weeks earlier than before."</p>
-        <div class="tc-author">
-          <div class="tc-avatar">SR</div>
-          <div><strong>Sarah Reynolds</strong><br/><small>COO, MediCore Health</small></div>
-        </div>
+
+    <div class="svc-grid reveal">
+      <div class="svc-card featured">
+        <div class="svc-n">// 01</div>
+        <div class="svc-icon">📊</div>
+        <h3>Custom Dashboard Design & Development</h3>
+        <p>Fully bespoke dashboards tailored to your industry, KPIs, and team workflows. No templates — pure craft.</p>
+        <ul class="svc-list">
+          <li>Interactive charts & real-time data</li>
+          <li>Role-based access & multi-user views</li>
+          <li>Mobile-responsive & white-label ready</li>
+          <li>Drill-down & filter capabilities</li>
+        </ul>
       </div>
-      <div class="testimonial-card featured">
-        <div class="tc-stars">★★★★★</div>
-        <p>"Exceptional work. Our financial reporting dashboard reduced our monthly close process from 5 days to just 6 hours. Absolutely game-changing."</p>
-        <div class="tc-author">
-          <div class="tc-avatar">MK</div>
-          <div><strong>Michael Kim</strong><br/><small>CFO, Vertex Capital</small></div>
-        </div>
+      <div class="svc-card">
+        <div class="svc-n">// 02</div>
+        <div class="svc-icon">🔗</div>
+        <h3>Data Integration & Pipeline</h3>
+        <p>Connect all your data sources — CRMs, ERPs, APIs, databases — into a clean, unified analytics layer.</p>
+        <ul class="svc-list">
+          <li>Multi-source consolidation</li>
+          <li>Real-time & batch ETL pipelines</li>
+          <li>Cloud warehouse setup</li>
+          <li>REST & GraphQL API integrations</li>
+        </ul>
       </div>
-      <div class="testimonial-card">
-        <div class="tc-stars">★★★★★</div>
-        <p>"They understood our supply chain complexity immediately. The dashboard is intuitive, beautiful, and incredibly powerful."</p>
-        <div class="tc-author">
-          <div class="tc-avatar">JP</div>
-          <div><strong>James Patel</strong><br/><small>VP Operations, LogiFlow</small></div>
-        </div>
+      <div class="svc-card">
+        <div class="svc-n">// 03</div>
+        <div class="svc-icon">⚡</div>
+        <h3>Real-Time Analytics</h3>
+        <p>Live dashboards updating the moment your data changes — sub-second latency, zero compromise.</p>
+        <ul class="svc-list">
+          <li>WebSocket-based live refresh</li>
+          <li>Alerting & anomaly detection</li>
+          <li>IoT & sensor data support</li>
+          <li>Streaming pipeline architecture</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-n">// 04</div>
+        <div class="svc-icon">🧠</div>
+        <h3>Analytics Consulting</h3>
+        <p>Not sure where to start? We audit your data maturity and design a roadmap to measurable ROI.</p>
+        <ul class="svc-list">
+          <li>Data maturity assessment</li>
+          <li>KPI framework design</li>
+          <li>Tool & technology selection</li>
+          <li>Team training & enablement</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-n">// 05</div>
+        <div class="svc-icon">🔒</div>
+        <h3>Maintenance & Support</h3>
+        <p>Ongoing monitoring, updates, and optimizations to keep your dashboards fast and accurate.</p>
+        <ul class="svc-list">
+          <li>24/7 uptime monitoring</li>
+          <li>Monthly enhancements</li>
+          <li>Performance optimization</li>
+          <li>Priority bug resolution</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-n">// 06</div>
+        <div class="svc-icon">🎓</div>
+        <h3>Training & Onboarding</h3>
+        <p>We ensure your team can use their dashboard confidently with live sessions and full documentation.</p>
+        <ul class="svc-list">
+          <li>Live walkthrough sessions</li>
+          <li>Custom documentation</li>
+          <li>Video tutorial library</li>
+          <li>Ongoing Q&A support</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ CTA BANNER ═══════════ -->
-<section class="cta-banner">
-  <div class="cta-bg">
-    <div class="orb orb-4"></div>
-    <div class="orb orb-5"></div>
+<!-- ═══════ TECH STACK ═══════ -->
+<section class="section stack-section">
+  <div class="container" style="text-align:center">
+    <div class="reveal">
+      <div class="sec-tag" style="margin:0 auto 20px">Tech Stack</div>
+      <h2 class="sec-title">Tools We <span class="gt">Master</span></h2>
+      <p class="sec-desc" style="margin:0 auto">Industry-leading BI and data tools — we pick the right stack for your requirements.</p>
+    </div>
+    <div class="stack-wrap reveal">
+      <div class="stack-badge">Power BI</div>
+      <div class="stack-badge">Tableau</div>
+      <div class="stack-badge">Looker</div>
+      <div class="stack-badge">Apache Superset</div>
+      <div class="stack-badge">Metabase</div>
+      <div class="stack-badge">Grafana</div>
+      <div class="stack-badge">D3.js</div>
+      <div class="stack-badge">Snowflake</div>
+      <div class="stack-badge">BigQuery</div>
+      <div class="stack-badge">dbt</div>
+      <div class="stack-badge">Apache Airflow</div>
+      <div class="stack-badge">Python / Pandas</div>
+      <div class="stack-badge">PostgreSQL</div>
+      <div class="stack-badge">AWS / GCP / Azure</div>
+    </div>
   </div>
+</section>
+
+<!-- ═══════ TESTIMONIALS ═══════ -->
+<section class="section testi-section">
   <div class="container">
-    <div class="cta-content">
-      <h2>Ready to See Your Data Differently?</h2>
-      <p>Let's build a dashboard that becomes your most valuable business tool.</p>
-      <div class="cta-btns">
-        <a href="pages/contact.html" class="btn-primary btn-large">Start Your Project</a>
-        <a href="pages/portfolio.html" class="btn-ghost btn-large">Browse Portfolio</a>
+    <div class="reveal">
+      <div class="sec-tag">Client Stories</div>
+      <h2 class="sec-title">What Our <span class="gt">Clients Say</span></h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"The dashboard transformed how our executive team makes decisions. We spot trends weeks earlier than before — it's become our most-used business tool."</p>
+        <div class="testi-author">
+          <div class="testi-av">SR</div>
+          <div><strong>Sarah Reynolds</strong><small>COO, MediCore Health</small></div>
+        </div>
+      </div>
+      <div class="testi-card feat">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Exceptional work. Our financial reporting dashboard reduced our monthly close process from 5 days to just 6 hours. Absolutely game-changing for our finance team."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,var(--b),var(--c))">MK</div>
+          <div><strong>Michael Kim</strong><small>CFO, Vertex Capital</small></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"They understood our supply chain complexity immediately. The dashboard is intuitive, beautiful, and incredibly powerful. Our ops team can't work without it now."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,var(--g),var(--b))">JP</div>
+          <div><strong>James Patel</strong><small>VP Operations, LogiFlow</small></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ FOOTER ═══════════ -->
+<!-- ═══════ ABOUT ═══════ -->
+<section class="section about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="sec-tag">Our Story</div>
+        <h2 class="sec-title">Built by Analysts,<br/><span class="gt">For Decision Makers</span></h2>
+        <p style="color:var(--muted2);line-height:1.8;margin-bottom:20px;font-size:0.95rem">
+          Vizytech was born from a frustration shared by our founders: too many businesses drowning in data but starving for insight. Generic BI tools weren't cutting it — each industry has its own language, its own metrics, its own complexity.
+        </p>
+        <p style="color:var(--muted2);line-height:1.8;margin-bottom:32px;font-size:0.95rem">
+          We set out to build something different — precision dashboards that don't just display data, but tell the story behind it and guide teams to the right decisions faster.
+        </p>
+        <div class="about-values">
+          <div class="about-val"><div class="av-dot"></div><div><strong>Precision First</strong><p>Every metric, every visual is chosen with purpose. We never add noise.</p></div></div>
+          <div class="about-val"><div class="av-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div><div><strong>Industry Deep-Dive</strong><p>We learn your world before we build your dashboard.</p></div></div>
+          <div class="about-val"><div class="av-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div><div><strong>Continuous Partnership</strong><p>We're with you long after launch — iterating as you grow.</p></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="about-stats-grid">
+          <div class="about-stat-card c1">
+            <div class="asc-n" data-target2="2019">2019</div>
+            <div class="asc-l">// founded</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="asc-n" data-target2="150" data-suffix2="+">150+</div>
+            <div class="asc-l">// dashboards</div>
+          </div>
+          <div class="about-stat-card c2">
+            <div class="asc-n green" data-target2="18" data-suffix2="+">18+</div>
+            <div class="asc-l">// industries</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="asc-n" data-target2="12">12</div>
+            <div class="asc-l">// team members</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA BANNER ═══════ -->
+<div class="cta-band">
+  <div class="cta-band-bg"></div>
+  <div class="container reveal">
+    <h2>Ready to See Your Data<br/><span class="gt">Differently?</span></h2>
+    <p>Let's build a dashboard that becomes your most valuable business tool.</p>
+    <div class="cta-btns">
+      <a href="#contact" class="btn btn-primary lg">Start Your Project</a>
+      <a href="#portfolio" class="btn btn-outline lg">Browse Portfolio</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Get In Touch</div>
+      <h2 class="sec-title">Let's Build Your<br/><span class="gt">Dream Dashboard</span></h2>
+      <p class="sec-desc">Tell us about your project and we'll respond within 24 hours with a tailored plan.</p>
+    </div>
+
+    <div class="contact-grid reveal">
+
+      <!-- Form -->
+      <div>
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="cf-row">
+            <div class="cf-group"><label class="cf-label">Full Name *</label><input class="cf-input" type="text" placeholder="Your full name" required/></div>
+            <div class="cf-group"><label class="cf-label">Email *</label><input class="cf-input" type="email" placeholder="you@company.com" required/></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-group"><label class="cf-label">Company</label><input class="cf-input" type="text" placeholder="Your company name"/></div>
+            <div class="cf-group"><label class="cf-label">Phone</label><input class="cf-input" type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">Industry *</label>
+            <select class="cf-select" required>
+              <option value="" disabled selected>Select your industry</option>
+              <option>Healthcare</option><option>Finance & Banking</option>
+              <option>Retail & E-commerce</option><option>Manufacturing</option>
+              <option>Logistics & Supply Chain</option><option>SaaS & Technology</option>
+              <option>Real Estate</option><option>Education</option><option>Other</option>
+            </select>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">Project Type *</label>
+            <select class="cf-select" required>
+              <option value="" disabled selected>What do you need?</option>
+              <option>New Dashboard Build</option><option>Dashboard Redesign</option>
+              <option>Data Integration</option><option>Analytics Consulting</option>
+              <option>Real-Time Analytics</option><option>Not Sure — Need Advice</option>
+            </select>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">Tell Us More *</label>
+            <textarea class="cf-textarea" placeholder="Describe your data challenges, the dashboards you need, key metrics you track, and anything else that helps us understand your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary lg cf-submit">Send My Request →</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="success-check">✓</div>
+          <h3>Message Sent!</h3>
+          <p>Thank you! We'll review your project and respond within 24 hours with a tailored proposal.</p>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <div class="cinfo-card">
+          <h3>Contact Information</h3>
+          <div class="cinfo-item"><div class="ci-ico">✉</div><div><strong>Email</strong><a href="mailto:hello@vizytech.in">hello@vizytech.in</a></div></div>
+          <div class="cinfo-item"><div class="ci-ico">📍</div><div><strong>Location</strong><span>Ratnagiri, Maharashtra, India</span></div></div>
+          <div class="cinfo-item"><div class="ci-ico">🕐</div><div><strong>Hours</strong><span>Mon–Fri, 9:00 AM – 6:30 PM IST</span></div></div>
+        </div>
+        <div class="cinfo-card">
+          <h3>What Happens Next?</h3>
+          <div class="next-steps">
+            <div class="ns"><div class="ns-n">1</div><div><strong>We Review</strong><p>Team reviews your project within a few hours.</p></div></div>
+            <div class="ns"><div class="ns-n">2</div><div><strong>Discovery Call</strong><p>30-min call to understand your needs in depth.</p></div></div>
+            <div class="ns"><div class="ns-n">3</div><div><strong>Proposal</strong><p>Tailored proposal with timeline and pricing.</p></div></div>
+            <div class="ns"><div class="ns-n">4</div><div><strong>We Build</strong><p>Project kickoff — and we get to work.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <span class="logo-mark">⬡</span>
-          <span class="logo-text">Vizy<em>tech</em></span>
+        <a href="#home" class="nav-logo" style="margin-bottom:4px">
+          <div class="nav-logo-hex">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><polygon points="16,2 29,9 29,23 16,30 3,23 3,9" stroke="rgba(0,229,255,0.35)" stroke-width="1" fill="rgba(0,229,255,0.04)"/></svg>
+            <div class="dot" style="width:6px;height:6px"></div>
+          </div>
+          <span class="nav-logo-text">Vizy<em>tech</em></span>
         </a>
-        <p>Visionary Tech, Visible Results. — We build intelligent dashboards for every industry.</p>
+        <p>Visionary Tech, Visible Results. — Precision dashboards engineered for every industry.</p>
         <div class="footer-socials">
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="GitHub">⌥</a>
+          <a href="#" class="footer-soc">in</a>
+          <a href="#" class="footer-soc">𝕏</a>
+          <a href="#" class="footer-soc">gh</a>
         </div>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="pages/about.html">About Us</a></li>
-          <li><a href="pages/services.html">Services</a></li>
-          <li><a href="pages/portfolio.html">Portfolio</a></li>
-          <li><a href="pages/industries.html">Industries</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#industries">Industries</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="pages/services.html">Custom Dashboards</a></li>
-          <li><a href="pages/services.html">Data Integration</a></li>
-          <li><a href="pages/services.html">Real-time Analytics</a></li>
-          <li><a href="pages/services.html">Dashboard Consulting</a></li>
+          <li><a href="#services">Custom Dashboards</a></li>
+          <li><a href="#services">Data Integration</a></li>
+          <li><a href="#services">Real-Time Analytics</a></li>
+          <li><a href="#services">Consulting</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="pages/contact.html">Get in Touch</a></li>
-          <li><a href="pages/contact.html">Request a Demo</a></li>
+          <li><a href="#contact">Get in Touch</a></li>
+          <li><a href="#contact">Request a Demo</a></li>
           <li><a href="mailto:hello@vizytech.in">hello@vizytech.in</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 Vizytech — Visionary Tech, Visible Results. All rights reserved.</p>
+    <div class="footer-bot">
+      <span>© 2025 Vizytech — Visionary Tech, Visible Results.</span>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -402,6 +1716,207 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- ═══════════════════════════════════════
+   SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+// ── Custom cursor ──────────────────────
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor(){
+  rx += (mx - rx) * 0.14;
+  ry += (my - ry) * 0.14;
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+// ── Particle canvas ────────────────────
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.r = Math.random() * 1.5 + 0.5;
+    this.alpha = Math.random() * 0.6 + 0.2;
+    this.color = Math.random() > 0.5 ? '0,229,255' : '0,255,157';
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 100) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(0,229,255,${0.08 * (1 - d/100)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+(function animCanvas() {
+  ctx.clearRect(0, 0, W, H);
+  drawConnections();
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animCanvas);
+})();
+
+// ── Navbar scroll ──────────────────────
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 20);
+});
+
+// ── Hamburger ─────────────────────────
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileNav');
+ham.addEventListener('click', () => mob.classList.toggle('open'));
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+
+// ── Active nav link on scroll ──────────
+const sections = document.querySelectorAll('section[id], div[id="home"]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#'+e.target.id); });
+    }
+  });
+}, { threshold: 0.35 });
+sections.forEach(s => observer.observe(s));
+
+// ── Reveal on scroll ──────────────────
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), 60);
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+// ── Counter animation ──────────────────
+function animCount(el, target, suffix, duration) {
+  let start = 0, t0 = null;
+  const step = ts => {
+    if (!t0) t0 = ts;
+    const p = Math.min((ts - t0) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-target]').forEach(el => {
+        animCount(el, +el.dataset.target, el.dataset.suffix || '', 2000);
+      });
+      statObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) statObs.observe(heroStats);
+
+// ── Portfolio filter ───────────────────
+document.querySelectorAll('.port-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.port-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('#portGrid .port-card').forEach(c => {
+      const show = f === 'all' || c.dataset.cat === f;
+      c.style.display = show ? 'block' : 'none';
+    });
+  });
+});
+
+// ── Image upload ───────────────────────
+const fi = document.getElementById('fileInput');
+const uz = document.getElementById('uploadZone');
+const pg = document.getElementById('portGrid');
+
+uz.addEventListener('dragover', e => { e.preventDefault(); uz.classList.add('drag-over'); });
+uz.addEventListener('dragleave', () => uz.classList.remove('drag-over'));
+uz.addEventListener('drop', e => { e.preventDefault(); uz.classList.remove('drag-over'); handleFiles(e.dataTransfer.files); });
+uz.addEventListener('click', e => { if (!e.target.classList.contains('uz-btn')) fi.click(); });
+fi.addEventListener('change', () => handleFiles(fi.files));
+
+function handleFiles(files) {
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const r = new FileReader();
+    r.onload = e => {
+      const title = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      const card = document.createElement('div');
+      card.className = 'port-card'; card.dataset.cat = 'uploaded';
+      card.innerHTML = `
+        <div class="port-img"><img src="${e.target.result}" alt="${title}"/><div class="port-overlay"><span class="port-overlay-text">// ${title}</span></div></div>
+        <div class="port-info"><div class="port-cat">Uploaded</div><h3>${title}</h3><p>Custom dashboard screenshot.</p></div>
+      `;
+      card.style.animation = 'fadeUp 0.5s ease both';
+      pg.appendChild(card);
+    };
+    r.readAsDataURL(file);
+  });
+}
+
+// ── Contact form ───────────────────────
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type=submit]');
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  setTimeout(() => {
+    this.style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  }, 1400);
+});
+
+// ── Smooth scroll for anchor links ────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
 </body>
 </html>
